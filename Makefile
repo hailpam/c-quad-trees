@@ -2,6 +2,7 @@ INC_DIR = inc
 SRC_DIR = src
 OBJ_DIR = obj
 TST_DIR = test
+DST_DIR = dist
 
 CC      = g++
 CCFLAGS  = -I${INC_DIR}
@@ -12,7 +13,7 @@ TEST    = test_quad_trees
 
 .PHONY: clean cleantest
 
-all: ${TARGET}.o ${TEST}.o ${TEST}
+all: cleantest ${TARGET}.o ${TEST}.o ${TEST}
 
 
 ${TEST}: ${OBJ_DIR}/${TEST}.o ${OBJ_DIR}/${TARGET}.o
@@ -27,7 +28,8 @@ ${TEST}.o: ${TST_DIR}/${TEST}.cpp ${OBJ_DIR}/${TARGET}.o
 	mv *.o ./${OBJ_DIR}
 
 clean:
-	rm ${OBJ_DIR}/*.o
+	rm -f ${OBJ_DIR}/*.o
+	rm -f ${DST_DIR}/*
 
 cleantest: clean
-	rm ${TEST}
+	rm -f ${TEST}
